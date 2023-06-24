@@ -1,0 +1,46 @@
+:root {
+    --paper-background-color: #f4f5f7;
+  }
+  
+  body {
+    -webkit-tap-highlight-color: transparent;
+    line-height: 1.2;
+    font-size: 16px;
+    font-weight: normal;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Mulish", sans-serif;
+  }
+  hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+  }
+  @media (max-width: 768px) {
+    div > p,
+    div > span {
+      font-size: 0.8rem;
+    }
+    p,
+    span {
+      font-size: 0.8rem;
+    }
+    button {
+      margin-bottom: 0.5rem;
+      width: auto;
+      max-width: 200px;
+      justify-content: "flex-start";
+    }
+    .issueLeftHeaderText {
+      font-size: 0.8rem;
+    }
+    .autocomplete {
+    }
+  }
+  

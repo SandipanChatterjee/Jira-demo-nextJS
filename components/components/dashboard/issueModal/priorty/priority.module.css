@@ -1,0 +1,23 @@
+.priority {
+  margin: auto 0.5rem;
+}
+
+.highest {
+  background-color: "#8B0000";
+}
+
+.high {
+  color: "#FF7F7F";
+}
+
+.medium {
+  color: "#FFA500";
+}
+
+.low {
+  color: "#90EE90";
+}
+
+.lowest {
+  color: "#006400";
+}

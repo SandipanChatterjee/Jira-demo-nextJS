@@ -1,0 +1,14 @@
+#input-container {
+  background-color: var(--paper-background-color);
+  width: 350px;
+}
+#input-container:focus {
+  background-color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .textfield {
+    width: 100%;
+    max-width: auto;
+  }
+}
