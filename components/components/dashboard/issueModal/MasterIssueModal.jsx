@@ -10,7 +10,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import IssueModalContent from "../issueModal/IssueModalContent";
 
-const MasterIssueModal = () => {
+const MasterIssueModal = ({ currentIssue }) => {
   // const [modalActive, setModalActive] = useState(false);
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const MasterIssueModal = () => {
   const currentIssueLoading = useSelector(
     (state) => state.issueReducer.currentIssueLoading
   );
-  const currentIssue = useSelector((state) => state.issueReducer.currentIssue);
+  // const currentIssue = useSelector((state) => state.issueReducer.currentIssue);
   const newCommentData = useSelector(
     (state) => state.commentsReducer.newCommentData
   );
@@ -73,7 +73,10 @@ const MasterIssueModal = () => {
             </div>
           ) : (
             <div style={loaderProject ? { pointerEvents: "none" } : null}>
-              <IssueModalContent modalCloseHandler={modalCloseHandler} />
+              <IssueModalContent
+                modalCloseHandler={modalCloseHandler}
+                issue={currentIssue}
+              />
             </div>
           )}
         </DialogContent>

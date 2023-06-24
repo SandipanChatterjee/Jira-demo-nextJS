@@ -1,8 +1,25 @@
 import App from "../components/App";
-export default function IndexPage() {
+import { createGuestAccount } from "../components/services/GuestAccount";
+import { getProject } from "../components/services/Project";
+
+export default function IndexPage({ authToken, project }) {
   return (
     <div>
-      <App />
+      <App authToken={authToken} project={project} />
     </div>
   );
 }
+
+export const getStaticProps = async () => {
+  const guestAccountResponse = await createGuestAccount();
+  let authToken = await guestAccountResponse;
+  console.log("token#", authToken.data.authToken);
+  const projectResponse = await getProject();
+  const project = await projectResponse;
+  return {
+    props: {
+      authToken: authToken.data.authToken,
+      project: project.project,
+    },
+  };
+};

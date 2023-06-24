@@ -25,14 +25,10 @@ export const fail = (data) => {
   };
 };
 
-export const authenticate = () => {
+export const authenticate = (authToken) => {
   return async (dispatch) => {
     dispatch(start());
     try {
-      let response = await createGuestAccount();
-      const authToken = await response;
-      console.log("authToken#", authToken);
-      localStorage.setItem("token", authToken.data.authToken);
       dispatch(success(authToken.data.authToken));
     } catch (e) {
       dispatch(fail(e));

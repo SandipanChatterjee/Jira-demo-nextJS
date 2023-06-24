@@ -10,33 +10,36 @@ import { setIssueTypes } from "./actions/issues";
 import SwipableDrawer from "./components/navbar/SwipableDrawer";
 import Dashboard from "./components/dashboard/Dashboard";
 
-function App() {
+function App(props) {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.authenticateReducer.token);
   const project = useSelector((state) => state.projectReducer.project);
   const [previouslyStoredToken, setPreviouslyStoredToken] = useState("");
   const ref = useRef(true);
 
-  useEffect(() => {
-    if (ref.current) {
-      ref.current = false;
-      return;
-    }
-    if (Object.keys(project).length > 0) {
-      console.log("APP", project);
-      dispatch(setIssueTypes(project.issues));
-    }
-  }, [project]);
+  // useEffect(() => {
+  //   if (ref.current) {
+  //     ref.current = false;
+  //     return;
+  //   }
+  //   if (Object.keys(project).length > 0) {
+  //     console.log("APP", project);
+  //     dispatch(setIssueTypes(project.issues));
+  //   }
+  // }, [project]);
 
-  useEffect(() => {
-    setPreviouslyStoredToken(localStorage.getItem("token"));
-  }, []);
+  // useEffect(() => {
+  //   // setPreviouslyStoredToken(localStorage.getItem("token"));
+  //   setPreviouslyStoredToken(
+  //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQzNTEyNCwiaWF0IjoxNjg3NTg4MTAxLCJleHAiOjE3MDMxNDAxMDF9.UScSviM45bdCI8SDGczmnZepqwmLPDZiXSZX082wl7c"
+  //   );
+  // }, []);
 
-  useEffect(() => {
-    if (previouslyStoredToken) {
-      dispatch(getProjectData());
-    }
-  }, [previouslyStoredToken]);
+  // useEffect(() => {
+  //   if (previouslyStoredToken) {
+  //     dispatch(getProjectData(props.project));
+  //   }
+  // }, [previouslyStoredToken]);
 
   useEffect(() => {
     if (process.env.NODE_ENV == "production") {
@@ -44,28 +47,41 @@ function App() {
       console.warn = function () {};
       console.error = function () {};
     }
-    if (!previouslyStoredToken) {
-      dispatch(authenticate());
-    }
+    dispatch(getProjectData(props.project));
+    dispatch(setIssueTypes(props.project.issues));
+
+    // if (!previouslyStoredToken) {
+    //   dispatch(authenticate(props.authToken));
+    // }
   }, []);
+
+  console.log("App#Project", props.project);
 
   const renderRootRoutes = () => {
     return (
       <div className="container">
-        {!previouslyStoredToken ? (
-          !token ? (
-            <div className="loaderContainer">
-              <Loader />
-            </div>
-          ) : (
-            <Dashboard />
-          )
-        ) : (
-          <Dashboard />
-        )}
+        <Dashboard project={props.project} />
       </div>
     );
   };
+
+  // const renderRootRoutes = () => {
+  //   return (
+  //     <div className="container">
+  //       {!previouslyStoredToken ? (
+  //         !token ? (
+  //           <div className="loaderContainer">
+  //             <Loader />
+  //           </div>
+  //         ) : (
+  //           <Dashboard project={props.project} />
+  //         )
+  //       ) : (
+  //         <Dashboard project={props.project} />
+  //       )}
+  //     </div>
+  //   );
+  // };
 
   return (
     <div className="App">

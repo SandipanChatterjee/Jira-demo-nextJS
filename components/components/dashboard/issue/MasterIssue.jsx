@@ -24,7 +24,7 @@ import {
 import { useStyles } from "./style";
 import { StyledBadge } from "./style";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useRouter } from "next/router";
 
 import Card from "@material-ui/core/Card";
 import Grid from "@material-ui/core/Grid";
@@ -33,17 +33,16 @@ import Avatar from "@material-ui/core/Avatar";
 import AvatarGroup from "@material-ui/lab/AvatarGroup";
 import ErrorBoundary from "../../../utils/ErrorBoundary";
 
-const MasterIssue = () => {
+const MasterIssue = ({ project }) => {
   const classes = useStyles();
-  const history = useHistory();
+  const router = useRouter();
   const dispatch = useDispatch();
 
   const selector = useSelectorIssues();
-  const searchedData =
-    useSelector((state) => state.searchReducer.searchedData) || issueTypes;
+
   const searchValue = useSelector((state) => state.searchReducer.searchValue);
   const currentIssue = useSelector((state) => state.issueReducer.currentIssue);
-  const users = useSelector((state) => state.projectReducer.project.users);
+  const users = project.users;
 
   const issueTypes = [
     selector.backlogIssues,
@@ -51,6 +50,9 @@ const MasterIssue = () => {
     selector.inprogressIssues,
     selector.completedIssues,
   ];
+
+  const searchedData =
+    useSelector((state) => state.searchReducer.searchedData) || issueTypes;
 
   const list = [];
 
@@ -140,7 +142,7 @@ const MasterIssue = () => {
     console.log(issueId);
     console.log("139");
     dispatch(getCurrentIssue(issueId));
-    history.push(`/project/board/${issueId}`);
+    router.push(`/project/board/${issueId}`);
     // setModalActive(true);
   };
 
