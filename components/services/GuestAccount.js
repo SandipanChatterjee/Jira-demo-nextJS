@@ -7,8 +7,6 @@ export const createGuestAccount = async (id) => {
     const guestApi = await axios.post(
       `${process.env.REACT_APP_API_URL}authentication/guest`
     );
-    const res = await guestApi;
-    // localStorage.setItem("token", res.data.authToken);
     return guestApi;
   } catch (e) {
     console.log(e);

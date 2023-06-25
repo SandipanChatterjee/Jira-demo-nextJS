@@ -13,7 +13,6 @@ export default function IndexPage({ authToken, project }) {
 export const getStaticProps = async () => {
   const guestAccountResponse = await createGuestAccount();
   let authToken = await guestAccountResponse;
-  console.log("token#", authToken.data.authToken);
   const projectResponse = await getProject();
   const project = await projectResponse;
   return {
