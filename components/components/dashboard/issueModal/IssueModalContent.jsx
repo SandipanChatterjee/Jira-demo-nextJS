@@ -95,7 +95,7 @@ const IssueModalContent = ({ modalCloseHandler, issue }) => {
     (state) => state.updateIssueListReducer.updatedIssue
   );
 
-  const [modalStyle] = React.useState(getModalStyle);
+  const [modalStyle] = useState(getModalStyle);
 
   const titleRef = useRef();
 
@@ -309,19 +309,15 @@ const IssueModalContent = ({ modalCloseHandler, issue }) => {
           <br />
           <Status />
           <br />
-          {
-            // <>
-            //   <Assignees />
-            //   <br />
-            //   <Reporter />
-            //   <br />
-            //   <Priority />
-            //   <br />
-            //   <Estimate />
-            //   <br />
-            //   <TimeTracker />
-            // </>
-          }
+          <Assignees issue={issue} />
+          <br />
+          <Reporter issue={issue} />
+          <br />
+          <Priority />
+          <br />
+          <Estimate />
+          <br />
+          <TimeTracker />
         </div>
       }
     </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import "./App.module.css";
 import Navbar from "./components/navbar/Navbar";
 import { RootRoutes } from "./routes/Index";
@@ -9,13 +9,14 @@ import { getProjectData } from "./actions/project";
 import { setIssueTypes } from "./actions/issues";
 import SwipableDrawer from "./components/navbar/SwipableDrawer";
 import Dashboard from "./components/dashboard/Dashboard";
-
+import { AppContext } from "./ContextData";
 function App(props) {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.authenticateReducer.token);
   const project = useSelector((state) => state.projectReducer.project);
   const [previouslyStoredToken, setPreviouslyStoredToken] = useState("");
   const ref = useRef(true);
+  const { setProjectData } = useContext(AppContext);
 
   // useEffect(() => {
   //   if (ref.current) {
@@ -49,6 +50,7 @@ function App(props) {
     }
     dispatch(getProjectData(props.project));
     dispatch(setIssueTypes(props.project.issues));
+    setProjectData(props.project);
 
     // if (!previouslyStoredToken) {
     //   dispatch(authenticate(props.authToken));

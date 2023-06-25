@@ -5,6 +5,7 @@ import { getModalStyle, useStyles } from "./style";
 import { setShowMasterIssue } from "../../../actions/masterIssue";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { useRouter } from "next/router";
 
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
@@ -12,6 +13,7 @@ import IssueModalContent from "../issueModal/IssueModalContent";
 
 const MasterIssueModal = ({ currentIssue }) => {
   // const [modalActive, setModalActive] = useState(false);
+  const router = useRouter();
   const classes = useStyles();
   const dispatch = useDispatch();
   const showMasterIssueModal = useSelector(
@@ -43,17 +45,16 @@ const MasterIssueModal = ({ currentIssue }) => {
 
   const modalCloseHandler = () => {
     dispatch(setShowMasterIssue(false));
-    history.goBack();
+    router.back();
   };
 
   useEffect(() => {
-    console.log("ref##", modalRef.current);
     dispatch(setShowMasterIssue(true));
   }, []);
 
   if (!currentIssueLoading) {
     if (Object.keys(currentIssue).length == 0) {
-      history.goBack();
+      router.back();
     }
   }
 

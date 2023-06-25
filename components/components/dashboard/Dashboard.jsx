@@ -26,7 +26,7 @@ const Dashboard = ({ project, currentUserData }) => {
     selector.completedIssues,
   ].flat(Infinity);
 
-  useEffect(async () => {
+  useEffect(() => {
     if (Object.keys(project).length !== 0) {
       dispatch(setIssueTypes(arr));
     }
@@ -46,8 +46,6 @@ const Dashboard = ({ project, currentUserData }) => {
   // if (error) {
   //   return <span>{error}</span>;
   // }
-
-  console.log("project#Dashboard", project);
 
   return (
     <div>

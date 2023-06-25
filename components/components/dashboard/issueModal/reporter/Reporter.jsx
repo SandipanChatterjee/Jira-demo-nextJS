@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect, Fragment, useContext } from "react";
 import {
   setSelectedReporter,
   setShowReporterList,
@@ -12,12 +12,14 @@ import TextField from "@material-ui/core/TextField";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import { AppContext } from "../../../../ContextData";
 
-const Reporter = () => {
+const Reporter = ({ issue }) => {
+  const { projectData } = useContext(AppContext);
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const issue = useSelector((state) => state.issueReducer.currentIssue);
+  // const issue = useSelector((state) => state.issueReducer.currentIssue);
 
   const users = useSelector((state) => state.projectReducer.project.users);
   const reportedId = useSelector((state) => state.reporterReducer.reporterId);
@@ -49,7 +51,7 @@ const Reporter = () => {
     }
   }, []);
 
-  const usersOption = users.filter((el) => el.id !== reportedId);
+  const usersOption = projectData.users.filter((el) => el.id !== reportedId);
 
   return (
     <div>

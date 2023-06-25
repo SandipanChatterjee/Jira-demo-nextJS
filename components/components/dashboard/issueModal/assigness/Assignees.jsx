@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef } from "react";
+import React, { Fragment, useContext, useEffect, useRef } from "react";
 import { Add, Clear } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -20,11 +20,13 @@ import { useStyles } from "./assigneesStyle";
 import { Avatar, TextField, Button } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import ErrorBoundary from "../../../../utils/ErrorBoundary";
+import { AppContext } from "../../../../ContextData";
 
-const Assignees = () => {
+const Assignees = ({ issue }) => {
+  const { projectData } = useContext(AppContext);
   const classes = useStyles();
   const dispatch = useDispatch();
-  const issue = useSelector((state) => state.issueReducer.currentIssue);
+  // const issue = useSelector((state) => state.issueReducer.currentIssue);
   const users = useSelector((state) => state.projectReducer.project.users);
   const showUsersList = useSelector(
     (state) => state.assigneesReducer.showUsersList
@@ -118,7 +120,10 @@ const Assignees = () => {
       dispatch(resetUsers());
     };
   }, []);
-  const usersOption = users.filter((el) => !assignedUsersId.includes(el.id));
+
+  const usersOption = projectData.users.filter(
+    (el) => !assignedUsersId.includes(el.id)
+  );
 
   const AssignedUserBtnContent = ({ user }) => {
     return (
