@@ -22,7 +22,6 @@ export const updateIssueListHandler = (payload, id) => {
     try {
       const response = await updateIssueList(payload, id);
       const data = await response;
-      console.log("data#Issue#", data.issue);
       dispatch(updateIssueListSuccess(data.issue));
     } catch (e) {
       console.log(e);

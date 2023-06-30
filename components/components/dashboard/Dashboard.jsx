@@ -10,15 +10,14 @@ import Search from "./search/Search";
 import { useStyles } from "./style";
 import Users from "./users/Users";
 
-const Dashboard = () => {
+const Dashboard = ({ project, currentUserData }) => {
   const dispatch = useDispatch();
-  const project = useSelector((state) => state.projectReducer.project);
-  const loader = useSelector((state) => state.projectReducer.loading);
-  const error = useSelector((state) => state.projectReducer.error);
-  const currentUser = useSelector((state) => state.usersReducer.currentUser);
+  // const project = useSelector((state) => state.projectReducer.project);
+  // const loader = useSelector((state) => state.projectReducer.loading);
+  // const error = useSelector((state) => state.projectReducer.error);
+  // const currentUser = useSelector((state) => state.usersReducer.currentUser);
 
   const classes = useStyles();
-  console.log("loader#", loader, project);
   const selector = useSelectorIssues();
   const arr = [
     selector.backlogIssues,
@@ -27,26 +26,26 @@ const Dashboard = () => {
     selector.completedIssues,
   ].flat(Infinity);
 
-  useEffect(async () => {
+  useEffect(() => {
     if (Object.keys(project).length !== 0) {
       dispatch(setIssueTypes(arr));
     }
-    if (Object.keys(currentUser).length === 0) {
-      dispatch(getCurrentUserData());
-    }
+    // if (Object.keys(currentUserData).length === 0) {
+    //   dispatch(getCurrentUserData(currentUserData));
+    // }
   }, []);
 
-  if (loader) {
-    return (
-      <div className={classes.loaderContainer}>
-        <Loader />
-      </div>
-    );
-  }
+  // if (loader) {
+  //   return (
+  //     <div className={classes.loaderContainer}>
+  //       <Loader />
+  //     </div>
+  //   );
+  // }
 
-  if (error) {
-    return <span>{error}</span>;
-  }
+  // if (error) {
+  //   return <span>{error}</span>;
+  // }
 
   return (
     <div>
@@ -57,10 +56,10 @@ const Dashboard = () => {
       <br />
       <div className={classes.container}>
         <Search />
-        <Users />
+        <Users project={project} currentUser={currentUserData} />
       </div>
       <br />
-      <MasterIssue />
+      <MasterIssue project={project} />
     </div>
   );
 };

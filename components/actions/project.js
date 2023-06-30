@@ -26,13 +26,11 @@ export const fail = (data) => {
   };
 };
 
-export const getProjectData = () => {
+export const getProjectData = (project) => {
   return async (dispatch) => {
     dispatch(start());
     try {
-      let response = await getProject();
-      const data = await response;
-      dispatch(success(data.project));
+      dispatch(success(project));
     } catch (e) {
       dispatch(fail(e));
     }

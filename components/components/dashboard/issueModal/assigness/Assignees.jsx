@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef } from "react";
+import React, { Fragment, useContext, useEffect, useRef } from "react";
 import { Add, Clear } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -20,11 +20,13 @@ import { useStyles } from "./assigneesStyle";
 import { Avatar, TextField, Button } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import ErrorBoundary from "../../../../utils/ErrorBoundary";
+import { AppContext } from "../../../../ContextData";
 
-const Assignees = () => {
+const Assignees = ({ issue }) => {
+  const { projectData } = useContext(AppContext);
   const classes = useStyles();
   const dispatch = useDispatch();
-  const issue = useSelector((state) => state.issueReducer.currentIssue);
+  // const issue = useSelector((state) => state.issueReducer.currentIssue);
   const users = useSelector((state) => state.projectReducer.project.users);
   const showUsersList = useSelector(
     (state) => state.assigneesReducer.showUsersList
@@ -51,12 +53,11 @@ const Assignees = () => {
   const showUsersListHandler = () => {
     dispatch(setShowUsersList(true));
   };
-  const changeUsersHandler = (e, val) => {
+  const changeUsersHandler = async (e, val) => {
     if (assignedUsersId.includes(val.id)) {
       dispatch(setShowUsersList(false));
       return;
     }
-    console.log("changeUsersHandler##");
     dispatch(setAssignedUsers(val));
     dispatch(setShowUsersList(false));
     const payload = {
@@ -64,7 +65,11 @@ const Assignees = () => {
       users: [...assignedUsers, { ...val }],
     };
     dispatch(updateIssueListHandler(payload, issue.id));
+    // const response = await fetch(`/api/updateCurrentIssue/${val.id}`);
+    // const data = await response.json();
+    // console.log("api#data#", data);
   };
+
   const deleteUserHandler = (userId) => {
     const payload = {
       userIds: assignedUsersId.filter((id) => id !== userId),
@@ -118,7 +123,10 @@ const Assignees = () => {
       dispatch(resetUsers());
     };
   }, []);
-  const usersOption = users.filter((el) => !assignedUsersId.includes(el.id));
+
+  const usersOption = projectData.users.filter(
+    (el) => !assignedUsersId.includes(el.id)
+  );
 
   const AssignedUserBtnContent = ({ user }) => {
     return (

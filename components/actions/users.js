@@ -21,12 +21,10 @@ export const setCurrentUser = (data) => {
   };
 };
 
-export const getCurrentUserData = () => {
+export const getCurrentUserData = (currentUserData) => {
   return async (dispatch) => {
     try {
-      let response = await getCurrentUser();
-      const data = await response;
-      dispatch(setCurrentUser(data.currentUser));
+      dispatch(setCurrentUser(currentUserData));
     } catch (e) {
       console.log(e);
     }

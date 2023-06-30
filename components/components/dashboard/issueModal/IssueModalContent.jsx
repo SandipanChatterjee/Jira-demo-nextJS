@@ -73,7 +73,7 @@ const formats = [
 let modifiedIssues = [];
 let prevDescriptionValue = "";
 
-const IssueModalContent = ({ modalCloseHandler }) => {
+const IssueModalContent = ({ modalCloseHandler, issue }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const selectorIssue = useSelectorIssues();
@@ -82,7 +82,7 @@ const IssueModalContent = ({ modalCloseHandler }) => {
     (state) => state.editorReducer.showTitleEditor
   );
   const titleText = useSelector((state) => state.editorReducer.titleText);
-  const issue = useSelector((state) => state.issueReducer.currentIssue);
+  // const issue = useSelector((state) => state.issueReducer.currentIssue);
 
   const showDescriptionEditor = useSelector(
     (state) => state.editorReducer.showDescriptionEditor
@@ -95,7 +95,7 @@ const IssueModalContent = ({ modalCloseHandler }) => {
     (state) => state.updateIssueListReducer.updatedIssue
   );
 
-  const [modalStyle] = React.useState(getModalStyle);
+  const [modalStyle] = useState(getModalStyle);
 
   const titleRef = useRef();
 
@@ -294,7 +294,7 @@ const IssueModalContent = ({ modalCloseHandler }) => {
         <p>Comments</p>
         <br />
         <NewCommentSection />
-        <CommentListSection />
+        {/* <CommentListSection /> */}
       </div>
       {
         <div style={{ flex: 1 }}>
@@ -309,9 +309,9 @@ const IssueModalContent = ({ modalCloseHandler }) => {
           <br />
           <Status />
           <br />
-          <Assignees />
+          <Assignees issue={issue} />
           <br />
-          <Reporter />
+          <Reporter issue={issue} />
           <br />
           <Priority />
           <br />

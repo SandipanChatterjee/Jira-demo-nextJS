@@ -9,11 +9,13 @@ import { setUsers, setCurrentUserActive } from "../../../actions/users";
 import { useSelector, useDispatch } from "react-redux";
 import ErrorBoundary from "../../../utils/ErrorBoundary";
 
-const Users = () => {
-  const project = useSelector((state) => state.projectReducer.project);
+const Users = ({ project, currentUser }) => {
+  console.log("project##", project);
+
+  // const project = useSelector((state) => state.projectReducer.project);
   const selector = useSelectorIssues();
   const currentUsers = useSelector((state) => state.usersReducer.users);
-  const currentUser = useSelector((state) => state.usersReducer.currentUser);
+  // const currentUser = useSelector((state) => state.usersReducer.currentUser);
   const currentUserActive = useSelector(
     (state) => state.usersReducer.currentUserActive
   );
