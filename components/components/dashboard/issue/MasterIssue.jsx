@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import {
   backlog,
@@ -160,6 +160,10 @@ const MasterIssue = ({ project }) => {
     : searchValue !== ""
     ? list.push(...[[], [], [], []])
     : list.push(...issueTypes);
+
+  useEffect(() => {
+    console.log = function () {};
+  }, []);
 
   return (
     <div>

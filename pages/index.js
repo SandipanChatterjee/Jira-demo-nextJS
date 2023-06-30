@@ -10,7 +10,7 @@ export default function IndexPage({ authToken, project }) {
   );
 }
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const guestAccountResponse = await createGuestAccount();
   let authToken = await guestAccountResponse;
   const projectResponse = await getProject();
@@ -22,3 +22,16 @@ export const getStaticProps = async () => {
     },
   };
 };
+
+// export const getStaticProps = async () => {
+//   const guestAccountResponse = await createGuestAccount();
+//   let authToken = await guestAccountResponse;
+//   const projectResponse = await getProject();
+//   const project = await projectResponse;
+//   return {
+//     props: {
+//       authToken: authToken.data.authToken,
+//       project: project.project,
+//     },
+//   };
+// };

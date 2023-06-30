@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Button, TextField } from "@material-ui/core";
-import { ArrowDropDown } from "@material-ui/icons";
-import { Autocomplete, createFilterOptions } from "@material-ui/lab";
+import ArrowDropDown from "@material-ui/icons/ArrowDropDown";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import { createFilterOptions } from "@material-ui/lab";
 import { issueStatus } from "../../../../utils/utils";
 import {
   setIssueStatusDropDown,

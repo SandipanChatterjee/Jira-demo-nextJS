@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseURL = "https://jira-api.ivorreic.com/"; // process.env.REACT_APP_API_URL;
+const baseURL = process.env.NEXT_PUBLIC_REACT_APP_API_URL;
 const instance = axios.create({
   baseURL: baseURL,
 });

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
-import "./App.module.css";
+import styles from "./App.module.css";
 import Navbar from "./components/navbar/Navbar";
 import { RootRoutes } from "./routes/Index";
 import { authenticate } from "./actions/guestAccount";
@@ -10,6 +10,7 @@ import { setIssueTypes } from "./actions/issues";
 import SwipableDrawer from "./components/navbar/SwipableDrawer";
 import Dashboard from "./components/dashboard/Dashboard";
 import { AppContext } from "./ContextData";
+
 function App(props) {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.authenticateReducer.token);
@@ -57,11 +58,9 @@ function App(props) {
     // }
   }, []);
 
-  console.log("App#Project", props.project);
-
   const renderRootRoutes = () => {
     return (
-      <div className="container">
+      <div className={styles.container}>
         <Dashboard project={props.project} />
       </div>
     );
@@ -86,11 +85,11 @@ function App(props) {
   // };
 
   return (
-    <div className="App">
-      <aside className="swipable-drawer">
+    <div className={styles.App}>
+      <aside className={styles.swipableDrawer}>
         <SwipableDrawer />
       </aside>
-      <div className="navbar">
+      <div className={styles.navbar}>
         <Navbar />
       </div>
       {renderRootRoutes()}

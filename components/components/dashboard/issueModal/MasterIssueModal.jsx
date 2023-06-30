@@ -5,7 +5,7 @@ import { getModalStyle, useStyles } from "./style";
 import { setShowMasterIssue } from "../../../actions/masterIssue";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { useRouter } from "next/router";
+import { useRouter, withRouter } from "next/router";
 
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
@@ -60,9 +60,14 @@ const MasterIssueModal = ({ currentIssue }) => {
     }
   }
 
-  // if (Object.keys(projectData || {}).length === 0) {
-  //   router?.push("/");
-  // }
+  /**
+   * ???
+   */
+  useEffect(() => {
+    if (!projectData) {
+      router.push("/");
+    }
+  }, [!projectData]);
 
   return (
     <div>
