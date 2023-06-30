@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { getCurrentIssue } from "../../../actions/issues";
 import { Loader } from "../../shared/loader/Loader";
 import { getModalStyle, useStyles } from "./style";
@@ -10,8 +10,10 @@ import { useRouter } from "next/router";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import IssueModalContent from "../issueModal/IssueModalContent";
+import { AppContext } from "../../../ContextData";
 
 const MasterIssueModal = ({ currentIssue }) => {
+  const { projectData } = useContext(AppContext);
   // const [modalActive, setModalActive] = useState(false);
   const router = useRouter();
   const classes = useStyles();
@@ -57,6 +59,10 @@ const MasterIssueModal = ({ currentIssue }) => {
       router.back();
     }
   }
+
+  // if (Object.keys(projectData || {}).length === 0) {
+  //   router?.push("/");
+  // }
 
   return (
     <div>

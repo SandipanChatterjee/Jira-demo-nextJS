@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseURL = process.env.REACT_APP_API_URL;
+const baseURL = "https://jira-api.ivorreic.com/"; // process.env.REACT_APP_API_URL;
 const instance = axios.create({
   baseURL: baseURL,
 });
@@ -22,7 +22,6 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   (config) => {
-    // console.log("responseConfig#", config);
     return config.data;
   },
   (error) => {
@@ -37,7 +36,7 @@ instance.interceptors.response.use(
     } else if (error?.response?.status >= 500) {
       errorMessage = "Internal Server Error";
     }
-    return new Error("error");
+    return new Error(errorMessage);
   }
 );
 

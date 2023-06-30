@@ -53,12 +53,11 @@ const Assignees = ({ issue }) => {
   const showUsersListHandler = () => {
     dispatch(setShowUsersList(true));
   };
-  const changeUsersHandler = (e, val) => {
+  const changeUsersHandler = async (e, val) => {
     if (assignedUsersId.includes(val.id)) {
       dispatch(setShowUsersList(false));
       return;
     }
-    console.log("changeUsersHandler##");
     dispatch(setAssignedUsers(val));
     dispatch(setShowUsersList(false));
     const payload = {
@@ -66,7 +65,11 @@ const Assignees = ({ issue }) => {
       users: [...assignedUsers, { ...val }],
     };
     dispatch(updateIssueListHandler(payload, issue.id));
+    // const response = await fetch(`/api/updateCurrentIssue/${val.id}`);
+    // const data = await response.json();
+    // console.log("api#data#", data);
   };
+
   const deleteUserHandler = (userId) => {
     const payload = {
       userIds: assignedUsersId.filter((id) => id !== userId),
