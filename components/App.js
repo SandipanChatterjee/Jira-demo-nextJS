@@ -10,14 +10,17 @@ import { setIssueTypes } from "./actions/issues";
 import SwipableDrawer from "./components/navbar/SwipableDrawer";
 import Dashboard from "./components/dashboard/Dashboard";
 import { AppContext } from "./ContextData";
+import { useRouter } from "next/router";
+import ProjectSettings from "./components/settings/ProjectSettings";
 
-function App(props) {
+function App(props = {}) {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.authenticateReducer.token);
   const project = useSelector((state) => state.projectReducer.project);
   const [previouslyStoredToken, setPreviouslyStoredToken] = useState("");
   const ref = useRef(true);
   const { setProjectData } = useContext(AppContext);
+  const router = useRouter();
 
   // useEffect(() => {
   //   if (ref.current) {
@@ -49,21 +52,31 @@ function App(props) {
       console.warn = function () {};
       console.error = function () {};
     }
-    dispatch(getProjectData(props.project));
-    dispatch(setIssueTypes(props.project.issues));
-    setProjectData(props.project);
-
+    if (props?.project) {
+      dispatch(getProjectData(props.project));
+      dispatch(setIssueTypes(props.project.issues));
+      setProjectData(props.project);
+    }
     // if (!previouslyStoredToken) {
     //   dispatch(authenticate(props.authToken));
     // }
   }, []);
 
   const renderRootRoutes = () => {
-    return (
-      <div className={styles.container}>
-        <Dashboard project={props.project} />
-      </div>
-    );
+    if (router.pathname === "/") {
+      return (
+        <div className={styles.container}>
+          <Dashboard project={props.project} />
+        </div>
+      );
+    }
+    if (router.pathname === "/project/settings") {
+      return (
+        <div className={styles.container}>
+          <ProjectSettings />
+        </div>
+      );
+    }
   };
 
   // const renderRootRoutes = () => {

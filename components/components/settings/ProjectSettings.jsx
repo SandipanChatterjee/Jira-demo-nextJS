@@ -14,6 +14,7 @@ import {
 import { formats, modules, projectCategory } from "../../utils/utils";
 import { Loader } from "../shared/loader/Loader";
 import { useStyles } from "./style";
+
 const ProjectSettings = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
