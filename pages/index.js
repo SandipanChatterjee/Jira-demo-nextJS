@@ -2,7 +2,7 @@ import App from "../components/App";
 import { createGuestAccount } from "../components/services/GuestAccount";
 import { getProject } from "../components/services/Project";
 
-export const runtime = "edge"; // 'nodejs' (default) | 'edge'
+export const runtime = "experimental-edge"; // 'nodejs' (default) | 'edge'
 
 export default function IndexPage({ authToken, project }) {
   return (
