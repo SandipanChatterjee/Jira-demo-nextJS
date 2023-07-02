@@ -12,7 +12,7 @@ export default function Issue({ currentIssue }) {
 export const getServerSideProps = async ({ res, params }) => {
   res.setHeader(
     "Cache-Control",
-    "public, s-maxage=1800, stale-while-revalidate=86400"
+    "public, s-maxage=1800, stale-while-revalidate=864000"
   );
   const { id } = params;
   const currentIssueResponse = await getIssue(id);

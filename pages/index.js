@@ -13,7 +13,7 @@ export default function IndexPage({ authToken, project }) {
 export const getServerSideProps = async ({ res }) => {
   res.setHeader(
     "Cache-Control",
-    "public, s-maxage=1800, stale-while-revalidate=86400"
+    "public, s-maxage=1800, stale-while-revalidate=864000"
   );
   const guestAccountResponse = await createGuestAccount();
   let authToken = await guestAccountResponse;
