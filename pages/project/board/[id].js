@@ -9,7 +9,11 @@ export default function Issue({ currentIssue }) {
   return <MasterIssueModal currentIssue={currentIssue} />;
 }
 
-export const getServerSideProps = async ({ params }) => {
+export const getServerSideProps = async ({ res, params }) => {
+  res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=1800, stale-while-revalidate=86400"
+  );
   const { id } = params;
   const currentIssueResponse = await getIssue(id);
   const currentIssue = await currentIssueResponse;
