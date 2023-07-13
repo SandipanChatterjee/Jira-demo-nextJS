@@ -11,6 +11,8 @@ To find out more details, go to https://tsh.io/blog/ssr-vs-ssg-in-nextjs/#:~:tex
 
 ### URL
 
+https://jira-demo-dhj435kug-sandipanchatterjee1.vercel.app/
+
 
 ### NOTES
 
