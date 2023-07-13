@@ -1,8 +1,9 @@
 import React, { Fragment, useState, useRef, useEffect } from "react";
 import DOMPurify from "dompurify";
 import { useStyles, getModalStyle } from "./style";
-// import ReactQuill from "react-quill";
-// import "react-quill/dist/quill.snow.css";
+import dynamic from "next/dynamic";
+const ReactQuill = dynamic(import("react-quill"), { ssr: false });
+import "react-quill/dist/quill.snow.css";
 
 import NewCommentSection from "./comments/comments/NewComment";
 import CommentListSection from "./comments/comments/CommentList";
@@ -82,7 +83,6 @@ const IssueModalContent = ({ modalCloseHandler, issue }) => {
     (state) => state.editorReducer.showTitleEditor
   );
   const titleText = useSelector((state) => state.editorReducer.titleText);
-  // const issue = useSelector((state) => state.issueReducer.currentIssue);
 
   const showDescriptionEditor = useSelector(
     (state) => state.editorReducer.showDescriptionEditor
@@ -236,12 +236,12 @@ const IssueModalContent = ({ modalCloseHandler, issue }) => {
             onLoad={() => titleRef.current.focus()}
           >
             {
-              // <ReactQuill
-              //   theme="snow"
-              //   ref={titleRef}
-              //   onChange={handleTitleChangeDebounce}
-              //   value={titleText || ""}
-              // />
+              <ReactQuill
+                theme="snow"
+                ref={titleRef}
+                onChange={handleTitleChangeDebounce}
+                value={titleText || ""}
+              />
             }
           </div>
         ) : (
@@ -260,13 +260,13 @@ const IssueModalContent = ({ modalCloseHandler, issue }) => {
         {showDescriptionEditor ? (
           <Fragment>
             {
-              // <ReactQuill
-              //   formats={formats}
-              //   modules={modules}
-              //   theme="snow"
-              //   onChange={handleDescriptionChangeDebounce}
-              //   value={safeIssueDescritpion || ""}
-              // />
+              <ReactQuill
+                formats={formats}
+                modules={modules}
+                theme="snow"
+                onChange={handleDescriptionChangeDebounce}
+                value={safeIssueDescritpion || ""}
+              />
             }
             <br />
             <Button
@@ -294,7 +294,7 @@ const IssueModalContent = ({ modalCloseHandler, issue }) => {
         <p>Comments</p>
         <br />
         <NewCommentSection />
-        {/* <CommentListSection /> */}
+        <CommentListSection issue={issue} />
       </div>
       {
         <div style={{ flex: 1 }}>

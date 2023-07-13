@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const routes = [
-  { route: "/project/board", title: "Kanban Board" },
+  { route: "/", title: "Kanban Board" },
   { route: "/project/settings", title: "Project Settings" },
 ];
 

@@ -1,6 +1,10 @@
 import axios from "../eaxios";
 export const saveComment = async (payload) => {
-  return await axios.post("comments", payload);
+  try {
+    return await axios.post("comments", payload);
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 export const saveEditedComment = async (id, payload) => {

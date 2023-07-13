@@ -1,5 +1,6 @@
 import React, { Fragment, useContext, useEffect, useRef } from "react";
-import { Add, Clear } from "@material-ui/icons";
+import Add from "@material-ui/icons/Add";
+import Clear from "@material-ui/icons/Clear";
 import { useDispatch, useSelector } from "react-redux";
 import {
   resetUsers,

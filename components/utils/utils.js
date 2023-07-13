@@ -1,11 +1,9 @@
 import React from "react";
-import {
-  ArrowUpward,
-  ArrowDownward,
-  CheckCircleRounded,
-  ErrorRounded,
-  AssignmentReturnedRounded,
-} from "@material-ui/icons";
+import ArrowUpward from "@material-ui/icons/ArrowUpward";
+import ArrowDownward from "@material-ui/icons/ArrowDownward";
+import CheckCircleRounded from "@material-ui/icons/CheckCircleRounded";
+import ErrorRounded from "@material-ui/icons/ErrorRounded";
+import AssignmentReturnedRounded from "@material-ui/icons/AssignmentReturnRounded";
 import { useDispatch } from "react-redux";
 
 export const issueStatus = {

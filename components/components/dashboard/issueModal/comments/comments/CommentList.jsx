@@ -27,12 +27,11 @@ import ErrorBoundary from "../../../../../utils/ErrorBoundary";
 let currentDeleteElementId = 0;
 let currentCommentIndex = null;
 
-const CommentList = () => {
+const CommentList = ({ issue }) => {
   const classes = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
   const dispatch = useDispatch();
 
-  const issue = useSelector((state) => state.issueReducer.currentIssue);
   let currentUser = useSelector((state) => state.usersReducer.currentUser);
   const commentsList = useSelector(
     (state) => state.commentsReducer.commentsList

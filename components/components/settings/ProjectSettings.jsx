@@ -1,8 +1,9 @@
 import React, { Fragment, useEffect } from "react";
 import { Button, InputLabel, TextField, Snackbar } from "@material-ui/core";
 import { Autocomplete, Alert } from "@material-ui/lab";
-// import ReactQuill from "react-quill";
-// import "react-quill/dist/quill.snow.css";
+import dynamic from "next/dynamic";
+const ReactQuill = dynamic(import("react-quill"), { ssr: false });
+import "react-quill/dist/quill.snow.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setProjectCategory,
@@ -14,6 +15,7 @@ import {
 import { formats, modules, projectCategory } from "../../utils/utils";
 import { Loader } from "../shared/loader/Loader";
 import { useStyles } from "./style";
+
 const ProjectSettings = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -106,14 +108,14 @@ const ProjectSettings = () => {
       <div className={classes.inputElements}>
         <InputLabel htmlFor="description">Description</InputLabel>
         {
-          // <ReactQuill
-          //   id="description"
-          //   formats={formats}
-          //   modules={modules}
-          //   theme="snow"
-          //   onChange={changeProjectDescription}
-          //   value={projectDescription}
-          // />
+          <ReactQuill
+            id="description"
+            formats={formats}
+            modules={modules}
+            theme="snow"
+            onChange={changeProjectDescription}
+            value={projectDescription}
+          />
         }
 
         <span className={classes.descTxt}>

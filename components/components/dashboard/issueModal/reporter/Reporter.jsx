@@ -19,8 +19,6 @@ const Reporter = ({ issue }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  // const issue = useSelector((state) => state.issueReducer.currentIssue);
-
   const users = useSelector((state) => state.projectReducer.project.users);
   const reportedId = useSelector((state) => state.reporterReducer.reporterId);
   const reporterData = useSelector(

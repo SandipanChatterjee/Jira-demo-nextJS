@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { TextField, InputAdornment } from "@material-ui/core";
-import { SearchRounded } from "@material-ui/icons";
+import SearchRounded from "@material-ui/icons/SearchRounded";
 import { search, searchedDataHandler } from "../../../actions/search";
 import { setIssueTypes } from "../../../actions/issues";
 import { useStyles } from "./style";

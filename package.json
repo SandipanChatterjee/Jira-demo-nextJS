@@ -47,9 +47,7 @@
     "start": "next dev",
     "build": "next build",
     "test": "next test",
-    "eject": "next eject",
-    "dev": "webpack-dev-server --config webpack.config.development.js",
-    "prod": "cross-env webpack --config webpack.config.production.js"
+    "eject": "next eject"
   },
   "eslintConfig": {
     "extends": [
@@ -78,6 +76,7 @@
     "clean-webpack-plugin": "^4.0.0",
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.4",
+    "eslint": "^8.44.0",
     "file-loader": "^6.2.0",
     "html-critical-webpack-plugin": "^2.1.0",
     "html-webpack-plugin": "^5.5.1",

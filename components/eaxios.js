@@ -1,21 +1,18 @@
 import axios from "axios";
-const baseURL = "https://jira-api.ivorreic.com/"; // process.env.REACT_APP_API_URL;
+const baseURL = process.env.NEXT_PUBLIC_REACT_APP_API_URL;
 const instance = axios.create({
   baseURL: baseURL,
 });
 
 instance.interceptors.request.use(
   (config) => {
-    // let token = localStorage.getItem("token");
-    let token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQzNTEyNCwiaWF0IjoxNjg3NTg4MTAxLCJleHAiOjE3MDMxNDAxMDF9.UScSviM45bdCI8SDGczmnZepqwmLPDZiXSZX082wl7c";
+    let token = process.env.NEXT_PUBLIC_REACT_APP_API_TOKEN;
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
     }
     return config;
   },
   (error) => {
-    console.log("error####", error);
     return Promise.reject(error);
   }
 );
