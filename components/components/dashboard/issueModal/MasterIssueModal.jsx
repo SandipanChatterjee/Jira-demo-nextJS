@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useContext } from "react";
+import { AppContext } from "../../../ContextData";
 import { getCurrentIssue } from "../../../actions/issues";
 import { Loader } from "../../shared/loader/Loader";
 import { getModalStyle, useStyles } from "./style";
@@ -6,15 +6,13 @@ import { setShowMasterIssue } from "../../../actions/masterIssue";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useRouter, withRouter } from "next/router";
-
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import IssueModalContent from "../issueModal/IssueModalContent";
-import { AppContext } from "../../../ContextData";
+import React, { useEffect, useState, useRef, useContext } from "react";
 
 const MasterIssueModal = ({ currentIssue }) => {
   const { projectData } = useContext(AppContext);
-  // const [modalActive, setModalActive] = useState(false);
   const router = useRouter();
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -24,26 +22,8 @@ const MasterIssueModal = ({ currentIssue }) => {
   const currentIssueLoading = useSelector(
     (state) => state.issueReducer.currentIssueLoading
   );
-  // const currentIssue = useSelector((state) => state.issueReducer.currentIssue);
-  const newCommentData = useSelector(
-    (state) => state.commentsReducer.newCommentData
-  );
-  const editCommentData = useSelector(
-    (state) => state.commentsReducer.editCommentData
-  );
-  const deleteCommentData = useSelector(
-    (state) => state.commentsReducer.deleteCommentData
-  );
 
   const loaderProject = useSelector((state) => state.projectReducer.loading);
-
-  const history = useHistory();
-
-  const [modalStyle] = React.useState(getModalStyle);
-
-  const modalRef = useRef();
-
-  const mouseDownTarget = React.useRef();
 
   const modalCloseHandler = () => {
     dispatch(setShowMasterIssue(false));
@@ -61,7 +41,7 @@ const MasterIssueModal = ({ currentIssue }) => {
   }
 
   /**
-   * ???
+   * Not redirecting???
    */
   useEffect(() => {
     if (!projectData) {

@@ -1,42 +1,35 @@
 import App from "../components/App";
-import { createGuestAccount } from "../components/services/GuestAccount";
 import { getProject } from "../components/services/Project";
 
-export const runtime = "experimental-edge"; // 'nodejs' (default) | 'edge'
+// export const runtime = "experimental-edge"; // 'nodejs' (default) | 'experimental-edge'
 
-export default function IndexPage({ authToken, project }) {
+export default function IndexPage({ project }) {
   return (
     <div>
-      <App authToken={authToken} project={project} />
+      <App project={project} />
     </div>
   );
 }
 
-export const getServerSideProps = async ({ res }) => {
-  res.setHeader(
-    "Cache-Control",
-    "public, s-maxage=1800, stale-while-revalidate=864000"
-  );
-  const guestAccountResponse = await createGuestAccount();
-  let authToken = await guestAccountResponse;
+export const getStaticProps = async () => {
   const projectResponse = await getProject();
   const project = await projectResponse;
   return {
     props: {
-      authToken: authToken.data.authToken,
       project: project.project,
     },
   };
 };
 
-// export const getStaticProps = async () => {
-//   const guestAccountResponse = await createGuestAccount();
-//   let authToken = await guestAccountResponse;
+// export const getServerSideProps = async ({ res }) => {
+//   res.setHeader(
+//     "Cache-Control",
+//     "public, s-maxage=1800, stale-while-revalidate=864000"
+//   );
 //   const projectResponse = await getProject();
 //   const project = await projectResponse;
 //   return {
 //     props: {
-//       authToken: authToken.data.authToken,
 //       project: project.project,
 //     },
 //   };
